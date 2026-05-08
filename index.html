@@ -18,23 +18,33 @@
 
             
         /* MISE EN PAGE DU TEXTE */
-        .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            width: 100%;
-        }
+       .container {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    padding: 40px;
+    border-radius: 30px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.4),
+        inset 0 0 20px rgba(255,255,255,0.05);
+}
 
         h1 {
-            font-size: 4rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 40px;
-            text-shadow: 0px 5px 20px #f56a00;
-        }
-
+    color: #f56a00;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.6);
+}
         /* LES BOITES DU COMPTE À REBOURS */
         .countdown {
             display: flex;
@@ -43,21 +53,30 @@
         }
 
         .time-box {
-            background: rgba(0, 0, 0, 0.7); /* Fond noir transparent */
-            padding: 30px;
-            border-radius: 20px;
-            min-width: 160px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+    background: linear-gradient(
+        145deg,
+        rgba(255,170,90,0.9),
+        rgba(190,90,50,0.85)
+    );
+
+    padding: 20px;
+    border-radius: 18px;
+
+    min-width: 110px;
+
+    box-shadow:
+        0 6px 15px rgba(0,0,0,0.4),
+        inset 0 2px 5px rgba(255,255,255,0.25);
+
+    border: 1px solid rgba(255,255,255,0.2);
+}
 
         .number {
-            font-size: 6rem;
-            font-weight: bold;
-            display: block;
-            line-height: 1;
-            color: #ffffff;
-        }
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+}
 
         .label {
             font-size: 1.2rem;
