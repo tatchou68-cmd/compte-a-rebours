@@ -3,144 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compte à rebours Coupe du Monde 2026</title>
+    <title>Coupe du Monde 2026</title>
     <style>
-        /* CONFIGURATION DE L'ÉCRAN */
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            font-family: 'Segoe UI', 'Arial Black', sans-serif;
-            background-color: black;
-            color: white;
+            background-color: #000;
+            color: #fff;
+            font-family: sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* L'IMAGE DE FOND (TES DRAPEAUX) */
-        #bg-image {
+        .bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-           background-image: url("https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070&auto=format&fit=crop");
+            /* ON UTILISE UN LIEN DIRECT POUR TESTER */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url("fond.jpg"); 
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            filter: brightness(40%) contrast(110%); /* Assombrit pour lire le texte */
             z-index: -1;
         }
 
-        /* MISE EN PAGE DU TEXTE */
         .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             text-align: center;
-            width: 100%;
         }
 
         h1 {
-            font-size: 4rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 40px;
-            text-shadow: 0px 5px 20px rgba(0,0,0,0.8);
+            font-size: clamp(2rem, 8vw, 5rem);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,1);
         }
 
-        /* LES BOITES DU COMPTE À REBOURS */
-        .countdown {
+        .timer {
             display: flex;
+            gap: 15px;
             justify-content: center;
-            gap: 30px;
         }
 
-        .time-box {
-            background: rgba(0, 0, 0, 0.7); /* Fond noir transparent */
-            padding: 30px;
-            border-radius: 20px;
-            min-width: 160px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .box {
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 80px;
+            border: 1px solid gold;
         }
 
-        .number {
-            font-size: 6rem;
+        .num {
+            font-size: 3rem;
             font-weight: bold;
             display: block;
-            line-height: 1;
-            color: #ffffff;
         }
 
         .label {
-            font-size: 1.2rem;
+            color: gold;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            color: #ffcc00; /* Couleur dorée pour le rappel du trophée */
-            margin-top: 15px;
-            display: block;
-            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div id="bg-image"></div>
+    <div class="bg"></div>
 
     <div class="container">
-        <h1>FIFA WORLD CUP 2026</h1>
-        
-        <div class="countdown">
-            <div class="time-box">
-                <span class="number" id="days">00</span>
-                <span class="label">Jours</span>
-            </div>
-            <div class="time-box">
-                <span class="number" id="hours">00</span>
-                <span class="label">Heures</span>
-            </div>
-            <div class="time-box">
-                <span class="number" id="minutes">00</span>
-                <span class="label">Minutes</span>
-            </div>
-            <div class="time-box">
-                <span class="number" id="seconds">00</span>
-                <span class="label">Secondes</span>
-            </div>
+        <h1>FIFA 2026</h1>
+        <div class="timer">
+            <div class="box"><span class="num" id="d">0</span><span class="label">Jours</span></div>
+            <div class="box"><span class="num" id="h">0</span><span class="label">Heures</span></div>
+            <div class="box"><span class="num" id="m">0</span><span class="label">Min</span></div>
+            <div class="box"><span class="num" id="s">0</span><span class="label">Sec</span></div>
         </div>
     </div>
 
     <script>
-        // RÉGLAGE DE LA DATE : 11 Juin 2026 à 22h00
-        const targetDate = new Date("June 11, 2026 22:00:00").getTime();
-
-        function updateCountdown() {
+        const target = new Date("June 11, 2026 22:00:00").getTime();
+        setInterval(() => {
             const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance < 0) {
-                clearInterval(interval);
-                document.querySelector(".container").innerHTML = "<h1>C'EST PARTI ! ⚽🏆</h1>";
-                return;
-            }
-
-            // Calculs mathématiques pour le temps
-            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Affichage avec un zéro devant si < 10
-            document.getElementById("days").innerText = d;
-            document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
-            document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
-            document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
-        }
-
-        // Mise à jour toutes les secondes
-        const interval = setInterval(updateCountdown, 1000);
-        updateCountdown();
+            const diff = target - now;
+            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
     </script>
 </body>
 </html>
